@@ -4,9 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
+import { ZoomDirective } from './diretivas/zoom.directive';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ZoomDirective
   ],
   imports: [
     BrowserModule,

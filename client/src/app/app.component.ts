@@ -14,14 +14,16 @@ export class AppComponent implements OnInit{
   // message: any;
   politicos:any = []
   politicosGeral:any = []
-  politicosFiltrados:any = []
+  politicoDetalhe:any = [] 
   pagina: number = 0;
+  main:boolean = true
   constructor (private api: ApiService, private http: HttpClient){}
  async ngOnInit(){
   this.politicosGeral = []
   this.carregar()
  }
 async carregar(){
+   this.main =true
    this.politicos=[]
    const data: any = await lastValueFrom(this.http.get(`http://localhost:3000/politico`))
    const inicio = 9*this.pagina
@@ -34,8 +36,6 @@ async carregar(){
     })
   }
    this.politicosGeral = data
-   console.log(data)
-
  }
  async proximo(){
   if (this.pagina < 4) {
@@ -71,5 +71,22 @@ async carregar(){
   }else{
     await this.carregar();
   }
+ }
+ async detalhes(obj:any){
+  this.main =false
+  this.politicoDetalhe = []
+  const card = obj.currentTarget;
+  const nome = card.querySelector('h2')?.innerText;
+  const partido = card.querySelector('h4')?.innerText;
+  const foto = card.querySelector('img')?.currentSrc;
+  await this.politicoDetalhe.push({
+    nome:nome,
+    foto:foto,
+    partido:partido
+   })
+ }
+ semFoto(obj:any){
+  const fotoPadrao = obj.target as HTMLImageElement
+  fotoPadrao.src = 'https://www.sandrasantosleiloes.com.br/build/images/sem-foto.a289f9fc.jpg'
  }
 }

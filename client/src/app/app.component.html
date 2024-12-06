@@ -1,16 +1,28 @@
+<div *ngIf="main">
 <section *ngIf="politicos" class="tabela">
-    <div class="card" *ngFor="let politico of politicos">
-      <img src="{{politico.foto}}" alt="">
+    <div class="card" *ngFor="let politico of politicos" appZoom (click)="detalhes($event)">
+      <img [src]="politico.foto"  alt="" (error)="semFoto($event)">
       <h2>{{politico.nome}}</h2>
       <h4>{{politico.partido}}</h4>
     </div>
-  </section>
+</section>
 <section class="barra">
-    <div class="botao" (click)="primeiro()"><<</div>
-    <div class="botao" (click)="anterior()"><</div>
-    <div class="botao" (click)="proximo()">></div>
-    <div class="botao" (click)="ultimo()">>></div>
+  <div class="botao" (click)="primeiro()"><<</div>
+  <div class="botao" (click)="anterior()"><</div>
+  <div class="botao" (click)="proximo()">></div>
+  <div class="botao" (click)="ultimo()">>></div>
 </section>
 <section class="pesquisa">
-    <input type="text" placeholder="Buscar nome..." class="buscador" (keyup)="buscar($event)">
+  <input type="text" placeholder="Buscar nome..." class="buscador" (keyup)="buscar($event)">
+</section>
+</div>
+<section class="detalhes" *ngIf="!main">
+  <div class="detalhes-container">
+    <div class="circulo" (click)="carregar()">&#10554;</div>
+    <div class="politicoDetalhe" *ngFor="let politico of politicoDetalhe">
+      <img src="{{politico.foto}}" alt="">
+      <h1>{{politico.nome}}</h1>
+      <h3>{{politico.partido}}</h3>
+    </div>
+  </div>
 </section>
