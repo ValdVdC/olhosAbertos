@@ -1,0 +1,16 @@
+<section *ngIf="politicos" class="tabela">
+    <div class="card" *ngFor="let politico of politicos">
+      <img src="{{politico.foto}}" alt="">
+      <h2>{{politico.nome}}</h2>
+      <h4>{{politico.partido}}</h4>
+    </div>
+  </section>
+<section class="barra">
+    <div class="botao" (click)="primeiro()"><<</div>
+    <div class="botao" (click)="anterior()"><</div>
+    <div class="botao" (click)="proximo()">></div>
+    <div class="botao" (click)="ultimo()">>></div>
+</section>
+<section class="pesquisa">
+    <input type="text" placeholder="Buscar nome..." class="buscador" (keyup)="buscar($event)">
+</section>
